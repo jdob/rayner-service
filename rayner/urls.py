@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from rayner.service import api
+from rayner.service import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('light/', api.LightAPI.as_view()),
+    path('light/', views.LightAPI.as_view()),
 ]
