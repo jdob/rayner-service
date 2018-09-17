@@ -22,4 +22,5 @@ from rayner.service import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('light/', views.LightAPI.as_view()),
+    path('changes/', views.ChangesAPI.as_view({'get': 'list'})),
 ]

@@ -2,10 +2,12 @@ import socket
 
 from django.conf import settings
 import phue
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rayner.service.models import ChangeEvent
+from rayner.service.serializers import ChangeEventSerializer
 
 
 class LightAPI(APIView):
@@ -51,3 +53,9 @@ class LightAPI(APIView):
         else:
             ip = request.META.get('REMOTE_ADDR')
         return ip
+
+
+class ChangesAPI(ModelViewSet):
+
+    queryset = ChangeEvent.objects.order_by('-timestamp')[:20]
+    serializer_class = ChangeEventSerializer
