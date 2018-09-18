@@ -1,0 +1,20 @@
+FROM python:3
+
+EXPOSE 8000
+
+ENV HOME=/code
+RUN mkdir -p ${HOME} && \
+    useradd -u 1001 -r -g 0 -d ${HOME} -s /sbin/nologin \
+            -c "Rayner Application User" default
+WORKDIR ${HOME}
+
+ADD rayner ${HOME}/rayner
+ADD requirements.txt manage.py ${HOME}/
+
+RUN pip install -r requirements.txt
+
+RUN chown -R 1001:0 ${HOME} && \
+    find ${HOME} -type d -exec chmod g+ws {} \;
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+USER 1001
