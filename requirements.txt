@@ -2,3 +2,4 @@ Django==2.1.1
 djangorestframework==3.8.2
 phue==1.0
 pytz==2018.5
+rgbxy==0.5
