@@ -26,7 +26,7 @@ SECRET_KEY = 'du_(#gv1((2yws4g&=jh))yu3ua5uy30-at1x%r-*5w3lwjp#z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
