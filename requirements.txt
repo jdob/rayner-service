@@ -3,3 +3,4 @@ djangorestframework==3.8.2
 phue==1.0
 pytz==2018.5
 rgbxy==0.5
+mysqlclient==1.3.13
