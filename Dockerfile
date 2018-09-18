@@ -16,5 +16,5 @@ RUN pip install -r requirements.txt
 RUN chown -R 1001:0 ${HOME} && \
     find ${HOME} -type d -exec chmod g+ws {} \;
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 USER 1001
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
