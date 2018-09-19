@@ -67,5 +67,5 @@ class LightAPI(APIView):
 
 class ChangesAPI(ModelViewSet):
 
-    queryset = ChangeEvent.objects.order_by('-timestamp')[:20]
+    queryset = ChangeEvent.objects.order_by('-timestamp')
     serializer_class = ChangeEventSerializer
