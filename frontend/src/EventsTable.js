@@ -14,9 +14,15 @@ class EventsTable extends Component {
         .then(results => {
             return results.json();
         }).then(data => {
-            let events = data.map((e) => {
+            let events = data.results.map((e) => {
                 return(
-                    <div>{e.color}</div>
+                    <tr key={e.id}>
+                        <td>{e.service_ip}</td>
+                        <td>{e.client_id}</td>
+                        <td>{e.client_ip})</td>
+                        <td>{e.color}</td>
+                        <td>{e.timestamp}</td>
+                    </tr>
                 )
             })
             this.setState({events: events})
@@ -26,7 +32,11 @@ class EventsTable extends Component {
 
     render() {
         return(
-            <div>{this.state.events}</div>
+            <table>
+            <tbody>
+            {this.state.events}
+            </tbody>
+            </table>
         )
     }
 }
