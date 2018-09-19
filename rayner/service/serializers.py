@@ -7,4 +7,4 @@ class ChangeEventSerializer(ModelSerializer):
 
     class Meta:
         model = ChangeEvent
-        fields = ('service_ip', 'client_ip', 'client_id', 'color', 'timestamp')
+        fields = ('id', 'service_ip', 'client_ip', 'client_id', 'color', 'timestamp')
