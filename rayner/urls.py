@@ -27,5 +27,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('light/', views.LightAPI.as_view()),
     path('changes/', views.ChangesAPI.as_view({'get': 'list'})),
-    url(r'^', TemplateView.as_view(template_name="index.html")),
+    path('', TemplateView.as_view(template_name="index.html")),
 ]
