@@ -90,14 +90,14 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 BRIDGE_IP = os.environ.get('BRIDGE_IP', None)
 BRIDGE_TOKEN = os.environ.get('BRIDGE_TOKEN', None)
 BRIDGE_LIGHT = os.environ.get('BRIDGE_LIGHT', None)
-BRIDGE_SKIP_CHECK = os.environ.get('BRIDGE_SKIP_CHECK', None)
+BRIDGE_MOCK = os.environ.get('BRIDGE_MOCK', None)
 
 if BRIDGE_IP:
     print('Bridge Configuration:')
     print('  IP: %s' % BRIDGE_IP)
     print('  Token: %s' % BRIDGE_TOKEN)
     print('  Light Name: %s' % BRIDGE_LIGHT)
-    print('  Skip Live Check: %s' % (BRIDGE_SKIP_CHECK is not None))
+    print('  Use Bridge Mock: %s' % (BRIDGE_MOCK is not None))
 else:
     print('*********************************')
     print('Bridge IP not configured')

@@ -15,8 +15,7 @@ class LightAPI(APIView):
 
     def get(self, request):
 
-        # See if we can get the current hue from the light itself
-        hex = None
+        hex_color = None
         result = {
             'hex': None,
             'on': None,
@@ -25,11 +24,12 @@ class LightAPI(APIView):
             'saturation': None,
         }
 
-        if not settings.BRIDGE_SKIP_CHECK:
+        # See if we can get the current hue from the light itself
+        if not settings.BRIDGE_MOCK:
             try:
                 light = self.bridge().get_light(settings.BRIDGE_LIGHT)
                 c = Converter()
-                hex = c.xy_to_hex(*light.xy)
+                hex_color = c.xy_to_hex(*light.xy)
 
                 result['on'] = light.on
                 result['hue'] = light.hue
@@ -39,24 +39,26 @@ class LightAPI(APIView):
                 print('Could not connect to bridge at %s' % settings.BRIDGE_IP)
 
         # If we can't, check the database
-        if hex is None:
+        if hex_color is None:
             qs = ChangeEvent.objects.order_by('-timestamp')[:1]
             if len(qs) > 0:
-                hex = qs[0].color
+                hex_color = qs[0].color
 
         # Worst case, default to white
-        if hex is None:
-            hex = 'ffffff'
+        if hex_color is None:
+            hex_color = 'ffffff'
 
-        result['hex'] = hex
+        result['hex'] = hex_color
         return Response(data=result)
 
     def post(self, request):
-        self.bridge().set_light(settings.BRIDGE_LIGHT, 'on', True)
+        if not settings.BRIDGE_MOCK:
+            self.bridge().set_light(settings.BRIDGE_LIGHT, 'on', True)
         return Response()
 
     def delete(self, request):
-        self.bridge().set_light(settings.BRIDGE_LIGHT, 'on', False)
+        if not settings.BRIDGE_MOCK:
+            self.bridge().set_light(settings.BRIDGE_LIGHT, 'on', False)
         return Response()
 
     def put(self, request):
@@ -82,9 +84,10 @@ class LightAPI(APIView):
                              color=hex_color)
             ce.save()
 
-        # Trigger the change; this will eventually need to be changed to
-        # a throttled queue for the load balancing test
-        self.bridge().set_light(settings.BRIDGE_LIGHT, 'xy', xy)
+        # There should probably be a throttle in place, but I can control
+        # that elsewhere in the demo
+        if not settings.BRIDGE_MOCK:
+            self.bridge().set_light(settings.BRIDGE_LIGHT, 'xy', xy)
 
         return Response()
 
