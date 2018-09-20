@@ -5,3 +5,13 @@
   border: 1px solid rgba(0, 0, 0, .2);
   background-color: #ffffff;
 }
+
+.status-box {
+  width: 200px;
+  height: 200px;
+  margin: 1px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 25px;
+  background-color: #0000ff;
+  box-shadow: 5px 5px #888888;
+}
