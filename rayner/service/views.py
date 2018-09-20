@@ -13,6 +13,44 @@ from rayner.service.serializers import ChangeEventSerializer
 
 class LightAPI(APIView):
 
+    def get(self, request):
+
+        # See if we can get the current hue from the light itself
+        hex = None
+        result = {
+            'hex': None,
+            'on': None,
+            'hue': None,
+            'brightness': None,
+            'saturation': None,
+        }
+
+        if not settings.BRIDGE_SKIP_CHECK:
+            try:
+                light = self.bridge().get_light(settings.BRIDGE_LIGHT)
+                c = Converter()
+                hex = c.xy_to_hex(*light.xy)
+
+                result['on'] = light.on
+                result['hue'] = light.hue
+                result['brightness'] = light.brightness
+                result['saturation'] = light.saturation
+            except phue.PhueRequestTimeout:
+                print('Could not connect to bridge at %s' % settings.BRIDGE_IP)
+
+        # If we can't, check the database
+        if hex is None:
+            qs = ChangeEvent.objects.order_by('-timestamp')[:1]
+            if len(qs) > 0:
+                hex = qs[0].color
+
+        # Worst case, default to white
+        if hex is None:
+            hex = 'ffffff'
+
+        result['hex'] = hex
+        return Response(data=result)
+
     def post(self, request):
         self.bridge().set_light(settings.BRIDGE_LIGHT, 'on', True)
         return Response()
