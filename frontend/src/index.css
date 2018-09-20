@@ -1,0 +1,7 @@
+.color-box {
+  width: 80%;
+  height: 20px;
+  margin: 1px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  background-color: #ffffff;
+}

@@ -19,8 +19,10 @@ class EventsTable extends Component {
                     <tr key={e.id}>
                         <td>{e.service_ip}</td>
                         <td>{e.client_id}</td>
-                        <td>{e.client_ip})</td>
-                        <td>{e.color}</td>
+                        <td>{e.client_ip}</td>
+                        <td>
+                            <div className="color-box" style={{background: '#' + e.color}}></div>
+                        </td>
                         <td>{e.timestamp}</td>
                     </tr>
                 )
@@ -32,10 +34,19 @@ class EventsTable extends Component {
 
     render() {
         return(
-            <table>
-            <tbody>
-            {this.state.events}
-            </tbody>
+            <table className="table table-striped table-bordered table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Service IP</th>
+                        <th scope="col">Client ID</th>
+                        <th scope="col">Client IP</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.events}
+                </tbody>
             </table>
         )
     }
