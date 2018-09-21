@@ -63,7 +63,7 @@ class LightAPI(APIView):
         return Response()
 
     def put(self, request):
-        service_ip = socket.gethostbyname('localhost')
+        service_ip = socket.gethostbyname(socket.gethostname())
         client_ip = self.get_client_ip(request)
         client_id = request.data.get('client_id', 'Unknown')
 
