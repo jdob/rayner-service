@@ -29,12 +29,13 @@ class LightAPI(APIView):
             try:
                 light = self.bridge().get_light(settings.BRIDGE_LIGHT)
                 c = Converter()
-                hex_color = c.xy_to_hex(*light.xy)
+                state = light['state']
+                hex_color = c.xy_to_hex(*state['xy'])
 
-                result['on'] = light.on
-                result['hue'] = light.hue
-                result['brightness'] = light.brightness
-                result['saturation'] = light.saturation
+                result['on'] = state['on']
+                result['hue'] = state['hue']
+                result['brightness'] = state['bri']
+                result['saturation'] = state['sat']
             except phue.PhueRequestTimeout:
                 print('Could not connect to bridge at %s' % settings.BRIDGE_IP)
 
