@@ -9,7 +9,7 @@ RUN mkdir -p ${HOME} && \
 WORKDIR ${HOME}
 
 ADD rayner ${HOME}/rayner
-ADD requirements.txt manage.py ${HOME}/
+ADD requirements.txt manage.py startup.sh ${HOME}/
 
 RUN pip install -r requirements.txt
 
@@ -17,4 +17,4 @@ RUN chown -R 1001:0 ${HOME} && \
     find ${HOME} -type d -exec chmod g+ws {} \;
 
 USER 1001
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["bash", "startup.sh"]

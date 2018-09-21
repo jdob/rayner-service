@@ -89,7 +89,7 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 # Bridge Configuration
 BRIDGE_IP = os.environ.get('BRIDGE_IP', None)
 BRIDGE_TOKEN = os.environ.get('BRIDGE_TOKEN', None)
-BRIDGE_LIGHT = os.environ.get('BRIDGE_LIGHT', None)
+BRIDGE_LIGHT = os.environ.get('BRIDGE_LIGHT', 'Desk')
 BRIDGE_MOCK = os.environ.get('BRIDGE_MOCK', None)
 
 if BRIDGE_IP:
@@ -108,10 +108,10 @@ else:
 
 if 'MYSQL_DATABASE' in os.environ:
     name = os.environ['MYSQL_DATABASE']
-    username = os.environ.get('MYSQL_USERNAME', None)
-    password = os.environ.get('MYSQL_PASSWORD', None)
-    host = os.environ.get('MYSQL_HOST', None)
-    port = os.environ.get('MYSQL_PORT', 3306)
+    username = os.environ.get('MYSQL_USERNAME', 'rayner')
+    password = os.environ.get('MYSQL_PASSWORD', 'rayner')
+    host = os.environ.get('MYSQL_HOST', 'mysql')
+    port = os.environ.get('MYSQL_PORT', '3306')
 
     database = {
         'ENGINE': 'django.db.backends.mysql',
