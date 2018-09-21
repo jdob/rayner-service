@@ -110,8 +110,8 @@ if 'MYSQL_DATABASE' in os.environ:
     name = os.environ['MYSQL_DATABASE']
     username = os.environ.get('MYSQL_USERNAME', 'rayner')
     password = os.environ.get('MYSQL_PASSWORD', 'rayner')
-    host = os.environ.get('MYSQL_HOST', 'mysql')
-    port = os.environ.get('MYSQL_PORT', '3306')
+    host = os.environ.get('MYSQL_SERVICE_HOST', 'mysql')
+    port = os.environ.get('MYSQL_SERVICE_PORT', '3306')
 
     database = {
         'ENGINE': 'django.db.backends.mysql',
