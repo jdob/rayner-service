@@ -89,7 +89,7 @@ CORS_ORIGIN_REGEX_WHITELIST = (
 # Bridge Configuration
 BRIDGE_IP = os.environ.get('BRIDGE_IP', None)
 BRIDGE_TOKEN = os.environ.get('BRIDGE_TOKEN', None)
-BRIDGE_LIGHT = os.environ.get('BRIDGE_LIGHT', 'Desk')
+BRIDGE_LIGHT = os.environ.get('BRIDGE_LIGHT', 'Demo')
 BRIDGE_MOCK = os.environ.get('BRIDGE_MOCK', None)
 
 if BRIDGE_IP:
